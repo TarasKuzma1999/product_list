@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { connect } from "react-redux"
 import { withRouter } from "react-router"
+import { Link } from "react-router-dom"
 import { compose } from "redux"
 import { getOneProductThunk, getCommentsThunk, updateProductThunk, createCommentThunk, deleteCommentThunk } from "../redux/productReducer"
 import UpdateProduct from "./update-product"
@@ -30,6 +31,7 @@ const Product = (props) => {
 
     return (
         <div>
+            <Link to={`/`}>На головну</Link><br />
             <img src={props.state.product.imageUrl} alt={props.state.product.name} />
             <h2>{props.state.product.name}</h2>
             <p>Кількість продукту в наявності: {props.state.product.count}</p>

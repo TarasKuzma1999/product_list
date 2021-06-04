@@ -7,6 +7,7 @@ function App() {
   return (
     <BrowserRouter>
       <div className="App">
+        <h1>Список продуктів</h1>
         <Route exact path="/"><ProductList /></Route>        
         <Route path="/product/:id"><Product /></Route>
       </div>

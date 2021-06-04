@@ -51,7 +51,7 @@ const NewProduct = (props) => {
 
   return (
     <div>
-      <button onClick={openModal}>Open Modal</button>
+      <button onClick={openModal}>Додати товар</button>
       <ModalWindow
         isOpen={modalIsOpen}
         onRequestClose={closeModal}

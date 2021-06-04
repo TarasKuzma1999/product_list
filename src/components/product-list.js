@@ -60,10 +60,10 @@ const ProductList = (props) => {
                 </p>
             </div>
             <div className="list">
-                {props.state.products.length ? props.state.products.map(el => <div key={el.id}>
+                {props.state.products.length ? props.state.products.map(el => <div className='list-item' key={el.id}>
                     <img src={el.imageUrl} alt={el.name} />
-                    <span>{el.name}</span>
-                    <span>Кількість одиниць: {el.count}</span>
+                    <span>{el.name}</span><br />
+                    <span>Кількість одиниць: {el.count}</span><br />
                     <Link to={`/product/${el.id}`}>Перейти до товару</Link>
 
                     <button onClick={() => deleteProduct(el.id, el.name)}>Видалити</button>
