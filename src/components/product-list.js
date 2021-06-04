@@ -1,6 +1,13 @@
 import { useEffect, useState } from "react";
 import { connect } from "react-redux"
-import { getProductsThunk, sortProducts, deleteProductThunk } from "../redux/productListReducer"
+import { Link } from "react-router-dom";
+import { getProductsThunk, sortProducts, deleteProductThunk, postNewProductThunk } from "../redux/productListReducer"
+import NewProduct from "./new-product";
+
+
+
+
+
 
 const ProductList = (props) => {
     useEffect(() => {
@@ -41,10 +48,11 @@ const ProductList = (props) => {
         }
     }
 
-
     return (
-
         <div>
+            <div>
+                <NewProduct postNewProductThunk={props.postNewProductThunk} />
+            </div>
             <div>
                 <p>Сортувати по:
                     <button onClick={() => sortByName()}>Назві</button>
@@ -56,12 +64,14 @@ const ProductList = (props) => {
                     <img src={el.imageUrl} alt={el.name} />
                     <span>{el.name}</span>
                     <span>Кількість одиниць: {el.count}</span>
-                    <button>перейти</button>
+                    <Link to={`/product/${el.id}`}>Перейти до товару</Link>
+
                     <button onClick={() => deleteProduct(el.id, el.name)}>Видалити</button>
                 </div>
-                ) : <p>нема</p>}
+                ) : <p>Товарів немає</p>}
 
             </div>
+
         </div>
     )
 }
@@ -69,4 +79,4 @@ const ProductList = (props) => {
 let mapState = (props) => ({ state: props.productList })
 
 
-export default connect(mapState, { getProductsThunk, sortProducts, deleteProductThunk })(ProductList)
+export default connect(mapState, { getProductsThunk, sortProducts, deleteProductThunk, postNewProductThunk })(ProductList)

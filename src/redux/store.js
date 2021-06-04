@@ -1,10 +1,12 @@
 import { applyMiddleware, combineReducers, createStore } from "redux";
 import productListReducer from "./productListReducer";
 import thunkMiddleware from "redux-thunk"
+import productReducer from "./productReducer";
 
 
 let reducers = combineReducers({
-    productList: productListReducer
+    productList: productListReducer,
+    product: productReducer
 })
 
 

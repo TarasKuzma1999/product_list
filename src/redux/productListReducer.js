@@ -1,4 +1,4 @@
-import { getProductsAPI, deleteProductAPI } from "../api/api"
+import { getProductsAPI, deleteProductAPI, postNewProductAPI } from "../api/api"
 
 let initialState = {
     products: []
@@ -19,21 +19,22 @@ const productListReducer = (state = initialState, action) => {
             }
         case 'DELETE_PRODUCTS':
             let newProducts = state.products.filter(el => {
-                console.log(el.id, action.id)
                 return el.id !== action.id
-            })
-                      
+            })                      
             return{
                 ...state,
                 products: newProducts                
             }
-    }
-    return state
+        default: 
+            return state
+        
+    }    
 }
 
 export const getProducts = (products) => ({ type: 'GET_PRODUCTS', products})
 export const sortProducts = (products) => ({ type: 'SORT_PRODUCTS', products})
 export const deleteProduct = (id) => ({ type: 'DELETE_PRODUCTS', id})
+
 
 
 
@@ -49,13 +50,22 @@ export const getProductsThunk = () => {
 export const deleteProductThunk = (id) => {
     return (dispatch) => {      
         deleteProductAPI(id).then(response => {
-            console.log(response.status)
             if(response.status === 200) {
                 dispatch(deleteProduct(id))
             }                        
-        })
-        
+        })   
+    }
+}
 
+export const postNewProductThunk = (newProduct) => {
+    return (dispatch) => {        
+        postNewProductAPI(newProduct).then(response => {
+            if(response.status === 201) {
+                getProductsAPI().then(response => {
+                    dispatch(getProducts(response));            
+                })
+            }           
+        })
     }
 }
 
